@@ -1,44 +1,26 @@
-# 1402번 틀리고 생각난 소인수분해 함수 선언
-def prime(num):
-    primes = []
-    i, j = 2, 0
-    while num > 1:
-        if num % (i+j) == 0:
-            primes.append(i+j)
-            num = num / (i+j)
-        else:
-            j += 1
-    return primes
+# https://solved.ac/profile/playdev7
 
-# 최소공배수 구해줄 함수 선언
-def min_mul(nums1, nums2):
-    result = 0
-    numbers = nums1 + nums2
-    numbers.sort()
+# m x n 행렬인데.. 아무튼 초콜릿을 생각하던, 행렬을 생각하던 다음과 같다.
 
-    for i in range(len(numbers)):
-        try:
-            if numbers[i] == numbers[i-1]:
-                numbers.remove(i)
-        except:
-            pass
+# 2*2 행렬일 경우 row 1 번 column 2번
+# 2*3 행렬일 경우 row 1 번 column 4번
 
-    for j in numbers:
-        if result == 0:
-            result += j
-        else:
-            result = result * j
+# 3*2 행렬일 경우 row 2 번 column 3번
+# 3*3 행렬일 경우 row 2 번 column 6번
+# 3*4 행렬일 경우 row 2 번 column 9번
 
-    return result
+# 4*3 행렬일 경우 row 3 번 column 8번
 
-def main():
-    n, m = input().split()
+# 다음과 같은 규칙을 찾을 수 있다.
+# m은 m-1
+# n은 (n-1)*m
 
-    n_primes = prime(int(n))
-    m_primes = prime(int(m))
+# 근데 여기는 행이 n이므로
+# n은 n-1
+# m은 (m-1)*n
+# 따라서 (n-1) + (m-1)*n 공식을 적용한다.
 
-    print(min_mul(n_primes, m_primes))
+n, m = input().split()
+n, m = int(n), int(m)
 
-
-if __name__ == "__main__":
-    main()
+print((n-1) + (m-1)*n)
