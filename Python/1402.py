@@ -1,34 +1,33 @@
-# 시간 초과 - 반복문 좀 더 줄여보자...
+# https://solved.ac/profile/playdev7
+# 2023-04-14 시간초과
 
-# 리스트 전역 변수로
-prime_numbers = []
-
-# A를 소인수 분해 할 함수 만들기
+# 입력받은 수를 인수분해 및 덧셈하는 함수 선언
 def factorization(num):
-    i, j = 2, 0
-    while num > 1:
-        if num % (i+j) == 0:
-            prime_numbers.append(i+j)
-            num = num / (i+j)
-        else:
-            j += 1
-    return prime_numbers
+    factors = []
+    sum_factors = 0
 
-# 모든 소수 덧셈하는 함수 만들기
-def total_prime_number(nums):
-    total = 0
-    for i in prime_numbers:
-        total += i
-    return total
+    for i in range(1, num+1):
+        # num의 약수면 약수 리스트에 추가
+        if num % i == 0:
+            factors.append(i)
+            # num을 약수로 나눔
+            num = num / i
+    
+    # 인수들에 대해 덧셈 진행.
+    for i in factors:
+        sum_factors += i
+    
+    # 인수들을 덧셈한 값을 반환
+    return sum_factors
+
 
 def main():
-    test = int(input())
-    for i in range(test):
-        a, b = input().split()
-        a = int(a)
-        b = int(b)
-        a = factorization(a)
-        if b == total_prime_number(a):
+    test_case = int(input())
+    for i in range(test_case):
+        a, b = map(int, input().split())
+        
+        # 인수들을 덧셈한 값이 B와 일치하면 "yes" 출력
+        if factorization(a) == b:
             print("yes")
         else:
             print("no")
