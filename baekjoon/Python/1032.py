@@ -1,20 +1,11 @@
 x = int(input())
 files = []
-f_name = ""
-file1 = ""
-file2 = ""
-result = []
+f_name = list(list(input()) for _ in range(x))
 
-for i in range(x):
-    f_name = input()
-    files.append(f_name)
-    if files[i-1] != files[i]:
-        file1 = files[i]
-        file2 = files[i-1]
-        for j in range(len(file1)):
-            if file1[j] == file2[j]:
-                result.append(file2[j])
-            else:
-                result.append("?")
+for i in range(len(f_name)):
+    if f_name[0] != f_name[i]:
+        for j in range(len(f_name[0])):
+            if f_name[0][j] != f_name[i][j]:
+                f_name[0][j] = "?"
 
-print("".join(result))
+print("".join(f_name[0]))
