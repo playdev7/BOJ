@@ -1,0 +1,1 @@
+a=[int(input()) for _ in range(28)];print(*[i for i in list(range(1, 31)) if i not in a],sep="\n")
